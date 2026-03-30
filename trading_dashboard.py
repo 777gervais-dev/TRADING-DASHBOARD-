@@ -863,11 +863,11 @@ with tab3:
         st.write(df_plot_liq.dtypes)
         st.write("**Aperçu des données :**")
         st.dataframe(df_plot_liq.head(15))
-       # =====================================================================
+        # =====================================================================
 
-       # === Graphique Zones de Liquidité (version sécurisée) ===
-       fig_liq.add_trace(
-       go.Bar(
+        # === Graphique Zones de Liquidité (version sécurisée) ===
+        fig_liq.add_trace(
+        go.Bar(
         x=df_plot_liq.iloc[:, 0],                    # ← Solution temporaire : prend la 1ère colonne numérique
         y=df_plot_liq.index,                         # ← Les niveaux de prix (en Y pour barres horizontales)
         orientation='h',                             # ← Horizontal = zones de liquidité classiques
