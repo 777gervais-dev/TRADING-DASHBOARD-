@@ -859,14 +859,16 @@ with tab3:
 st.subheader("🔍 DEBUG - Colonnes du DataFrame Liquidité")
 st.write("✅ Colonnes disponibles :", list(df_plot_liq.columns))
 st.write("✅ Index :", df_plot_liq.index[:10].tolist())
-st.dataframe(df_plot_liq.head(15))   # affiche les 15 premières lignes
+st.dataframe(df_plot_liq.head(15))
 # ============================================================
-            fig_liq.add_trace(
+
+# === GRAPHIC ZONES DE LIQUIDITÉ ===
+fig_liq.add_trace(
     go.Bar(
-        x=df_plot_liq['volume'],          # ← colonne NUMÉRIQUE (volume/largeur)
-        y=df_plot_liq.index,              # ← prix en Y pour barres horizontales
-        orientation='h',                  # ← indispensable pour zones de liquidité
-        marker=dict(color='rgba(0, 255, 0, 0.6)'),   # ou la couleur que tu veux
+        x=df_plot_liq['liquidity'],      # ← CHANGE CE NOM après avoir vu le debug
+        y=df_plot_liq.index,
+        orientation='h',
+        marker=dict(color='rgba(0, 255, 100, 0.7)', line=dict(width=0)),
         showlegend=False,
     ),
     row=2, col=1
