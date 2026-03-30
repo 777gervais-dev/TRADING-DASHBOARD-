@@ -855,12 +855,32 @@ with tab3:
             opens = df_plot_liq['Open'].squeeze()
             vol_colors = ['#00ff8866' if c >= o else '#ff2d5566'
                           for c, o in zip(closes, opens)]
-        # ==================== DEBUG ZONES LIQUIDITÉ ====================
-        st.subheader("🔍 DEBUG - Colonnes du DataFrame Liquidité")
-        st.write("✅ Colonnes disponibles :", list(df_plot_liq.columns))
-        st.write("✅ Index :", df_plot_liq.index[:10].tolist())
-        st.dataframe(df_plot_liq.head(15))
+        ## ==================== DEBUG ZONES DE LIQUIDITÉ ====================
+        st.subheader("🔍 DEBUG - Zones de Liquidité")
+        st.write("**Shape du DataFrame :**", df_plot_liq.shape)
+        st.write("**Colonnes disponibles :**", list(df_plot_liq.columns))
+        st.write("**Types des colonnes :**")
+        st.write(df_plot_liq.dtypes)
+        st.write("**Aperçu des 10 premières lignes :**")
+        st.dataframe(df_plot_liq.head(10))
         # ============================================================
+
+        # === Création du graphique (version sécurisée) ===
+        fig_liq.add_trace(
+        go.Bar(
+        # === CHOISIS LE BON NOM CI-DESSOUS APRÈS AVOIR VU LE DEBUG ===
+        x=df_plot_liq.iloc[:, 0],           # ← Prend la PREMIÈRE colonne numérique (solution temporaire)
+        # x=df_plot_liq['NOM_EXACT_DE_LA_COLONNE'],  # ← Décommente et remplace par le vrai nom
+        y=df_plot_liq.index,
+        orientation='h',
+        marker=dict(
+            color='rgba(0, 255, 100, 0.65)',
+            line=dict(width=0)
+        ),
+        showlegend=False,
+    ),
+    row=2, col=1
+)
 
         # === GRAPHIC ZONES DE LIQUIDITÉ ===
         fig_liq.add_trace(
