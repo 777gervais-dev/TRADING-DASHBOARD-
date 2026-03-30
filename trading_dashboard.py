@@ -855,13 +855,16 @@ with tab3:
             opens = df_plot_liq['Open'].squeeze()
             vol_colors = ['#00ff8866' if c >= o else '#ff2d5566'
                           for c, o in zip(closes, opens)]
-            fig_liq.add_trace(go.Bar(
-                x=df_plot_liq.index,
-                y=vols,
-                marker_color=vol_colors,
-                name="Volume",
-                showlegend=False,
-            ), row=2, col=1)
+            fig_liq.add_trace(
+    go.Bar(
+        x=df_plot_liq['volume'],          # ← colonne NUMÉRIQUE (volume/largeur)
+        y=df_plot_liq.index,              # ← prix en Y pour barres horizontales
+        orientation='h',                  # ← indispensable pour zones de liquidité
+        marker=dict(color='rgba(0, 255, 0, 0.6)'),   # ou la couleur que tu veux
+        showlegend=False,
+    ),
+    row=2, col=1
+)
 
         # VWAP line
         if liq['vwap']:
