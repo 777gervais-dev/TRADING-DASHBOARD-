@@ -855,15 +855,27 @@ with tab3:
             opens = df_plot_liq['Open'].squeeze()
             vol_colors = ['#00ff8866' if c >= o else '#ff2d5566'
                           for c, o in zip(closes, opens)]
-        ## ==================== DEBUG ZONES DE LIQUIDITÉ ====================
+        # ==================== DEBUG ZONES DE LIQUIDITÉ (obligatoire) ====================
         st.subheader("🔍 DEBUG - Zones de Liquidité")
-        st.write("**Shape du DataFrame :**", df_plot_liq.shape)
+        st.write("**Shape :**", df_plot_liq.shape)
         st.write("**Colonnes disponibles :**", list(df_plot_liq.columns))
-        st.write("**Types des colonnes :**")
+        st.write("**Types :**")
         st.write(df_plot_liq.dtypes)
-        st.write("**Aperçu des 10 premières lignes :**")
-        st.dataframe(df_plot_liq.head(10))
-        # ============================================================
+        st.write("**Aperçu des données :**")
+        st.dataframe(df_plot_liq.head(15))
+       # =====================================================================
+
+       # === Graphique Zones de Liquidité (version sécurisée) ===
+       fig_liq.add_trace(
+       go.Bar(
+        x=df_plot_liq.iloc[:, 0],                    # ← Solution temporaire : prend la 1ère colonne numérique
+        y=df_plot_liq.index,                         # ← Les niveaux de prix (en Y pour barres horizontales)
+        orientation='h',                             # ← Horizontal = zones de liquidité classiques
+        marker=dict(color='rgba(0, 255, 120, 0.7)', line=dict(width=0)),
+        showlegend=False,
+    ),
+    row=2, col=1
+)
 
         # === Création du graphique (version sécurisée) ===
         fig_liq.add_trace(
