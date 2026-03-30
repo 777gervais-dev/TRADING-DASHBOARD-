@@ -855,6 +855,12 @@ with tab3:
             opens = df_plot_liq['Open'].squeeze()
             vol_colors = ['#00ff8866' if c >= o else '#ff2d5566'
                           for c, o in zip(closes, opens)]
+            # ==================== DEBUG ZONES LIQUIDITÉ ====================
+st.subheader("🔍 DEBUG - Colonnes du DataFrame Liquidité")
+st.write("✅ Colonnes disponibles :", list(df_plot_liq.columns))
+st.write("✅ Index :", df_plot_liq.index[:10].tolist())
+st.dataframe(df_plot_liq.head(15))   # affiche les 15 premières lignes
+# ============================================================
             fig_liq.add_trace(
     go.Bar(
         x=df_plot_liq['volume'],          # ← colonne NUMÉRIQUE (volume/largeur)
