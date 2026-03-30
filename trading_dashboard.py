@@ -860,11 +860,11 @@ with tab3:
         st.write("✅ Colonnes disponibles :", list(df_plot_liq.columns))
         st.write("✅ Index :", df_plot_liq.index[:10].tolist())
         st.dataframe(df_plot_liq.head(15))
-# ============================================================
+        # ============================================================
 
-         # === GRAPHIC ZONES DE LIQUIDITÉ ===
-         fig_liq.add_trace(
-         go.Bar(
+        # === GRAPHIC ZONES DE LIQUIDITÉ ===
+        fig_liq.add_trace(
+        go.Bar(
         x=df_plot_liq['liquidity'],      # ← CHANGE CE NOM après avoir vu le debug
         y=df_plot_liq.index,
         orientation='h',
